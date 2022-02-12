@@ -2,11 +2,13 @@
 // node_modules/.bin/nodemon index.js
 // node-repl
 // npm run dev
-
+// https://morning-reef-54351.herokuapp.com/api/persons
 
 const express = require('express')
 const app = express()
 app.use(express.json())
+app.use(express.static('build'))
+
 const cors = require('cors')
 app.use(cors())
 const morgan = require('morgan') //let's us log the time it takes to process the request and other info.
