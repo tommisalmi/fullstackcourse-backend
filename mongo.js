@@ -12,27 +12,22 @@ const len = process.argv.length
 
 // console.log("Connecting to the database...")
 
-const url =
+const url = `mongodb+srv://fullstack:${password}@cluster0.pcwot.mongodb.net/personApp?retryWrites=true&w=majority`
 //   `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
-  `mongodb+srv://fullstack:${password}@cluster0.pcwot.mongodb.net/personApp?retryWrites=true&w=majority`
-
 // console.log("len is: ", len)
 mongoose.connect(url)
 
 // console.log("wadap")
 const personSchema = new mongoose.Schema({
     name: String,
-    number: String
-  })
-  
+    number: String,
+})
 const Person = mongoose.model('Person', personSchema)
-  
-
 const printPerson = (person) => {
     console.log(`${person.name} ${person.number}`)
 }
 
-if (len == 3) {
+if (len === 3) {
     // (async function () {
     //     const result = await Person.find({});
     //     console.log("phonebook:")
@@ -43,38 +38,30 @@ if (len == 3) {
     //     console.log('adsasd')
     // })();
 
-    Person.find({}).then(result => {
-        console.log("phonebook:")
-        result.forEach(person => {
-          printPerson(person)
+    Person.find({}).then((result) => {
+        // console.log("phonebook:")
+        result.forEach((person) => {
+            printPerson(person)
         })
         // console.log("hei")
         mongoose.connection.close()
         // console.log("hoi")
-      })
+    })
 }
 
-else if (len == 5) {
+else if (len === 5) {
     const person = new Person({
-        name: name,
-        number: number
+        name,
+        number,
     })
 
-    person.save().then(result => {
+    person.save().then((result) => {
         console.log(`added ${name} number ${number} to phonebook`)
         mongoose.connection.close()
     })
 }
+
 else {
-    console.log("Something went wrong, check the syntax for this application")
+    console.log('Something went wrong, check the syntax for this application')
     mongoose.connection.close()
 }
-
-
-
-
-
-
-
-
-
